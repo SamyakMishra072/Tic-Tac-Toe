@@ -21,7 +21,7 @@ A sophisticated Tic Tac Toe game with an impressive GUI built using Next.js, Mat
 1. **Clone the Repository:**
 
    ```bash
-   git clone git@github.com:SamyakMishra072/tic-tac-toe-project.git
+   git clone https://github.com/SamyakMishra072/Tic-Tac-Toe.git
    cd tic-tac-toe-project
 
 Made by Samyak Mishra.
