@@ -8,6 +8,10 @@ import '../styles/globals.css';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
+    primary: { main: '#00ffff' }, // Neon cyan
+    secondary: { main: '#ff00ff' }, // Neon magenta
+    background: { default: '#0a0a0a', paper: '#121212' },
     primary: {
       main: '#1976d2', // Blue
     },
