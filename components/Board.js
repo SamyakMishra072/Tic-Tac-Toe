@@ -1,5 +1,3 @@
-// components/Board.js
-
 import React from 'react';
 import { Grid, Paper } from '@mui/material';
 import Square from './Square';
@@ -7,12 +5,19 @@ import Square from './Square';
 const Board = ({ board, onMove }) => {
   return (
     <Paper
-      elevation={3}
+      elevation={10}
       sx={{
-        padding: 2,
+        padding: 3,
         margin: 'auto',
         maxWidth: 320,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#0a0a0a',
+        border: '2px solid rgba(0, 255, 255, 0.8)',
+        boxShadow: '0px 0px 15px rgba(0, 255, 255, 0.8)',
+        borderRadius: '12px',
+        transition: '0.3s ease-in-out',
+        '&:hover': {
+          boxShadow: '0px 0px 25px rgba(0, 255, 255, 1)',
+        },
       }}
     >
       <Grid container spacing={1}>
