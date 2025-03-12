@@ -1,11 +1,11 @@
 // pages/index.js
 
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Typography, Box } from '@mui/material';
+import { Container, Button, Typography, Box, TextField } from '@mui/material';
 import Header from '../components/Header';
 import Board from '../components/Board';
 import Scoreboard from '../components/Scoreboard';
-import Footer from '../components/Footer'; // Import Footer component
+import Footer from '../components/Footer';
 import { calculateWinner } from '../utils/gameLogic';
 import {
   winSound,
@@ -13,20 +13,19 @@ import {
   resetSound,
   playBackgroundMusic,
   pauseBackgroundMusic,
-} from '../utils/sound'; // Import sounds
+} from '../utils/sound';
 
 const Home = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [scores, setScores] = useState({ X: 0, O: 0, Draws: 0 });
   const [winner, setWinner] = useState(null);
-  const [gameMode, setGameMode] = useState('single'); // 'single' or 'multi'
+  const [gameMode, setGameMode] = useState('single');
+  const [playerNames, setPlayerNames] = useState({ X: '', O: 'Computer' });
 
   useEffect(() => {
-    // Play background music on mount
     playBackgroundMusic();
     return () => {
-      // Pause background music on unmount
       pauseBackgroundMusic();
     };
   }, []);
@@ -36,15 +35,21 @@ const Home = () => {
     if (win) {
       setWinner(win);
       setScores((prevScores) => ({ ...prevScores, [win]: prevScores[win] + 1 }));
-      winSound.play(); // Play win sound
+      winSound.play();
       setTimeout(resetBoard, 2000);
     } else if (!board.includes(null)) {
       setWinner('Draw');
       setScores((prevScores) => ({ ...prevScores, Draws: prevScores.Draws + 1 }));
-      drawSound.play(); // Play draw sound
+      drawSound.play();
       setTimeout(resetBoard, 2000);
     }
   }, [board]);
+
+  useEffect(() => {
+    if (gameMode === 'single') {
+      setPlayerNames((prev) => ({ ...prev, O: 'Computer' }));
+    }
+  }, [gameMode]);
 
   const handleMove = (index) => {
     if (board[index] || winner) return;
@@ -53,7 +58,6 @@ const Home = () => {
     newBoard[index] = isXNext ? 'X' : 'O';
     setBoard(newBoard);
     setIsXNext(!isXNext);
-    // Removed AI move logic from here
   };
 
   const makeMove = (index) => {
@@ -66,12 +70,11 @@ const Home = () => {
   };
 
   const resetBoard = () => {
-    resetSound.play(); // Play reset sound
+    resetSound.play();
     setBoard(Array(9).fill(null));
     setWinner(null);
   };
 
-  // Simple AI using Minimax Algorithm
   const getBestMove = (currentBoard) => {
     let bestScore = -Infinity;
     let move = -1;
@@ -121,23 +124,22 @@ const Home = () => {
   };
 
   const switchMode = () => {
-    resetSound.play(); // Play reset sound
-    setGameMode((prevMode) => (prevMode === 'single' ? 'multi' : 'single'));
+    resetSound.play();
+    const newMode = gameMode === 'single' ? 'multi' : 'single';
+    setGameMode(newMode);
+    if (newMode === 'multi' && playerNames.O === 'Computer') {
+      setPlayerNames((prev) => ({ ...prev, O: '' }));
+    }
     resetBoard();
   };
 
-  // New useEffect for handling AI moves
   useEffect(() => {
-    // Only trigger AI move in single-player mode and if it's AI's turn
     if (gameMode === 'single' && !isXNext && !winner) {
       const aiMove = getBestMove(board);
       if (aiMove !== -1) {
-        // Adding a slight delay for better UX
         const aiMoveTimeout = setTimeout(() => {
           makeMove(aiMove);
         }, 500);
-
-        // Cleanup timeout on unmount or when dependencies change
         return () => clearTimeout(aiMoveTimeout);
       }
     }
@@ -147,17 +149,39 @@ const Home = () => {
     <div>
       <Header />
       <Container sx={{ textAlign: 'center', marginTop: 4, paddingBottom: '60px' }}>
-        {/* Added paddingBottom to prevent content from being hidden behind the fixed footer */}
-        <Scoreboard scores={scores} />
+        <Box sx={{ marginBottom: 2 }}>
+          <TextField
+            label="Player X Name"
+            value={playerNames.X}
+            onChange={(e) => setPlayerNames((prev) => ({ ...prev, X: e.target.value }))}
+            sx={{ mr: 2 }}
+          />
+          <TextField
+            label="Player O Name"
+            value={playerNames.O}
+            onChange={(e) => {
+              if (gameMode === 'multi') {
+                setPlayerNames((prev) => ({ ...prev, O: e.target.value }));
+              }
+            }}
+            disabled={gameMode === 'single'}
+          />
+        </Box>
+        <Scoreboard scores={scores} playerX={playerNames.X || 'X'} playerO={playerNames.O || 'O'} />
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom>
             {winner
               ? winner === 'Draw'
                 ? "It's a Draw!"
-                : `Player ${winner} Wins!`
-              : `Next Player: ${isXNext ? 'X' : 'O'}`}
+                : `${playerNames[winner] || winner} Wins!`
+              : `Next Player: ${isXNext ? playerNames.X || 'X' : playerNames.O || 'O'}`}
           </Typography>
-          <Board board={board} onMove={handleMove} />
+          <Board 
+  board={board} 
+  onMove={handleMove}
+  playerX={playerNames.X || 'X'}  // Add these 2 new props
+  playerO={playerNames.O || 'O'}
+/>
         </Box>
         <Button variant="contained" color="secondary" onClick={resetBoard} sx={{ mr: 2 }}>
           Reset Game
@@ -166,7 +190,7 @@ const Home = () => {
           Switch to {gameMode === 'single' ? 'Multiplayer' : 'Single Player'}
         </Button>
       </Container>
-      <Footer /> {/* Include the Footer component */}
+      <Footer />
     </div>
   );
 };
