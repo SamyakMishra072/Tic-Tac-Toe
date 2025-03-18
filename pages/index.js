@@ -13,6 +13,7 @@ import {
   DialogContentText, 
   DialogActions 
 } from '@mui/material';
+import confetti from 'canvas-confetti';
 import Header from '../components/Header';
 import Board from '../components/Board';
 import Scoreboard from '../components/Scoreboard';
@@ -34,6 +35,7 @@ const Home = () => {
   const [gameMode, setGameMode] = useState('single');
   const [playerNames, setPlayerNames] = useState({ X: '', O: 'Computer' });
   const [instructionsOpen, setInstructionsOpen] = useState(false);
+  const [winningLine, setWinningLine] = useState([]);
 
   // Sound and music handlers
   useEffect(() => {
@@ -43,12 +45,26 @@ const Home = () => {
 
   // Game logic
   useEffect(() => {
-    const win = calculateWinner(board);
-    if (win) {
-      setWinner(win);
-      setScores(prev => ({ ...prev, [win]: prev[win] + 1 }));
+    const result = calculateWinner(board);
+    
+    if (result) {
+      setWinner(result.winner);
+      setWinningLine(result.line);
+      setScores(prev => ({ 
+        ...prev, 
+        [result.winner]: prev[result.winner] + 1 
+      }));
+      
+      // Celebration effects
       winSound.play();
-      setTimeout(resetBoard, 2000);
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#4CAF50', '#2196F3', '#FFC107']
+      });
+      
+      setTimeout(resetBoard, 3000);
     } else if (!board.includes(null)) {
       setWinner('Draw');
       setScores(prev => ({ ...prev, Draws: prev.Draws + 1 }));
@@ -67,6 +83,7 @@ const Home = () => {
   // Game controls
   const handleMove = index => {
     if (board[index] || winner) return;
+    
     const newBoard = [...board];
     newBoard[index] = isXNext ? 'X' : 'O';
     setBoard(newBoard);
@@ -76,9 +93,10 @@ const Home = () => {
   const resetBoard = () => {
     resetSound.play();
     setBoard(Array(9).fill(null));
-    setWinner(null);
+    setIsXNext(true); 
+    setWinner(null); 
+    setWinningLine([]); 
   };
-
   // AI Logic
   const getBestMove = (currentBoard) => {
     let bestScore = -Infinity;
@@ -99,8 +117,8 @@ const Home = () => {
 
   const minimax = (currentBoard, depth, isMaximizing) => {
     const result = calculateWinner(currentBoard);
-    if (result === 'O') return 10 - depth;
-    if (result === 'X') return depth - 10;
+    if (result?.winner === 'O') return 10 - depth;
+    if (result?.winner === 'X') return depth - 10;
     if (!currentBoard.includes(null)) return 0;
 
     if (isMaximizing) {
@@ -246,14 +264,24 @@ const Home = () => {
             onMove={handleMove}
             playerX={playerNames.X || 'X'}
             playerO={playerNames.O || 'O'}
+            winningLine={winningLine}
           />
         </Box>
 
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-          <Button variant="contained" color="secondary" onClick={resetBoard}>
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            onClick={resetBoard}
+            
+          >
             Reset Game
           </Button>
-          <Button variant="outlined" onClick={switchMode}>
+          <Button 
+            variant="outlined" 
+            onClick={switchMode}
+          
+          >
             Switch to {gameMode === 'single' ? 'Multiplayer' : 'Single Player'}
           </Button>
         </Box>
