@@ -1,8 +1,8 @@
-// components/Square.js - Update to include animation
+// components/Square.js
 import React from 'react';
 import { Button, Typography } from '@mui/material';
-import { clickSound } from '../utils/sound';
 import { keyframes } from '@emotion/react';
+import { clickSound } from '../utils/sound';
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -10,7 +10,7 @@ const pulse = keyframes`
   100% { transform: scale(1); }
 `;
 
-const Square = ({ value, displayValue, onClick, isWinning }) => {
+const Square = ({ value, onClick, isWinning }) => {
   const handleClick = () => {
     if (!value) {
       clickSound.play();
@@ -26,18 +26,16 @@ const Square = ({ value, displayValue, onClick, isWinning }) => {
         width: '100px',
         height: '100px',
         fontSize: '2rem',
-        animation: isWinning ? `${pulse} 1s ease-in-out infinite` : 'none',
+        animation: isWinning ? `${pulse} 1s infinite` : 'none',
         backgroundColor: isWinning ? 'rgba(76, 175, 80, 0.2)' : 'inherit',
         border: isWinning ? '2px solid #4CAF50' : '1px solid rgba(0, 0, 0, 0.23)',
-        transition: 'all 0.3s ease',
         '&:hover': {
-          backgroundColor: isWinning ? 'rgba(76, 175, 80, 0.3)' : '#e0e0e0',
-          transform: isWinning ? 'scale(1.05)' : 'scale(1.05)'
-        },
+          backgroundColor: isWinning ? 'rgba(76, 175, 80, 0.3)' : '#e0e0e0'
+        }
       }}
     >
       <Typography variant="h3" color="textPrimary">
-        {displayValue}
+        {value}
       </Typography>
     </Button>
   );

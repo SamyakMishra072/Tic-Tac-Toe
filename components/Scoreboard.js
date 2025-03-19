@@ -1,11 +1,10 @@
 // components/Scoreboard.js
-
 import React from 'react';
 import { Paper, Grid, Typography } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Scoreboard = ({ scores }) => {
+const Scoreboard = ({ scores, playerX, playerO }) => {
   return (
     <Paper
       elevation={3}
@@ -20,13 +19,13 @@ const Scoreboard = ({ scores }) => {
         <Grid item xs={4}>
           <EmojiEventsIcon color="primary" fontSize="large" />
           <Typography variant="h6" align="center">
-            X: {scores.X}
+            {playerX}: {scores.X}
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <CloseIcon color="error" fontSize="large" />
           <Typography variant="h6" align="center">
-            O: {scores.O}
+            {playerO}: {scores.O}
           </Typography>
         </Grid>
         <Grid item xs={4}>
