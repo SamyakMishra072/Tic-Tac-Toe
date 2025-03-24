@@ -1,1 +1,16 @@
 
+.board {
+    background-color: var(--board-bg);
+    transition: background-color 0.3s ease;
+  }
+  
+  .square {
+    background-color: var(--square-bg);
+    color: var(--text);
+    transition: all 0.3s ease;
+  }
+  
+  /* Add this for smooth transitions */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
