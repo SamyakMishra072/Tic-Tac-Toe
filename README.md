@@ -1,27 +1,62 @@
-# Tic Tac Toe Project
+# Tic Tac Toe 🎮 [![Vercel Deployment](https://img.shields.io/badge/deployed%20on-vercel-black?style=flat&logo=vercel)](https://tictactoe-seven-sandy.vercel.app/)
 
-A sophisticated Tic Tac Toe game with an impressive GUI built using Next.js, Material-UI, and Howler.js. Features include interactive gameplay, score tracking, sound effects, and responsive design.
+A modern twist on the classic game featuring scalable boards, AI opponent, and immersive sound effects.
 
-## Features
+![Gameplay Screenshot](/public/Demo.png)
 
-- **Interactive UI:** Built with Material-UI for a polished and responsive interface.
-- **Game Modes:** Single-player mode with AI opponent and multiplayer mode.
-- **Sound Effects:** Click, win, draw, and reset sounds enhance user experience.
-- **Scoreboard:** Tracks wins, losses, and draws.
-- **Responsive Design:** Optimized for desktops, tablets, and mobile devices.
-- **Deployment:** Deployed on Vercel for easy access.
-- **Mute/Unmute:** Control over game sounds via the header.
+## 🌟 Features
 
-## Demo
+### 🕹️ Gameplay
+- Multiple board sizes (3x3 to 6x6)
+- Custom win conditions (3+ consecutive marks)
+- Single-player vs AI and local multiplayer modes
+- Move validation and game history
 
-[Live Demo Link](https://tictactoe-seven-sandy.vercel.app/)
+### 🎨 Interface
+- Responsive Material-UI design
+- Light/dark theme toggle
+- Interactive scoreboard
+- Animated winning lines
+- Mobile-first approach
 
-## Installation
+### 🔊 Audio
+- Contextual sound effects using Howler.js
+- Toggleable mute button
+- Distinct sounds for:
+  - Player moves
+  - Game wins
+  - Draws
+  - Resets
 
-1. **Clone the Repository:**
+### ⚙️ Technical
+- Next.js optimized performance
+- React Context API state management
+- Persistent score tracking
+- Automated AI moves
+- Vercel deployment
 
-   ```bash
-   git clone https://github.com/SamyakMishra072/Tic-Tac-Toe.git
-   cd tic-tac-toe-project
+## 🛠️ Technologies
 
-Made by Samyak Mishra.
+**Frontend Framework:**  
+![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js)  
+**UI Library:**  
+![Material-UI](https://img.shields.io/badge/-Material--UI-0081CB?style=flat&logo=mui)  
+**Audio:**  
+![Howler.js](https://img.shields.io/badge/-Howler.js-FF3300?style=flat)  
+**Deployment:**  
+![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel)
+
+## 🚀 Installation
+
+```bash
+# Clone repository
+git clone https://github.com/SamyakMishra072/Tic-Tac-Toe.git
+
+# Navigate to project directory
+cd Tic-Tac-Toe
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
