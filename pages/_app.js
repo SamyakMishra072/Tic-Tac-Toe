@@ -53,8 +53,28 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <Head>
-        <title>Tic Tac Toe</title>
+        {/* Primary Meta Tags */}
+        <title>Tic Tac Toe - Play Classic XO Game Online</title>
+        <meta name="title" content="Tic Tac Toe - Play Classic XO Game Online" />
+        <meta name="description" content="Play the classic Tic Tac Toe game online with adjustable board sizes and custom rules. Challenge the computer or play with friends in this modern implementation of the timeless strategy game." />
+        <meta name="keywords" content="tic tac toe, XO game, noughts and crosses, strategy game, online game, board game, puzzle game" />
+        <meta name="author" content="Your Name" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://your-domain.com/" />
+        <meta property="og:title" content="Tic Tac Toe - Play Classic XO Game Online" />
+        <meta property="og:description" content="Modern implementation of the classic Tic Tac Toe game with adjustable board sizes and custom rules." />
+        <meta property="og:image" content="https://your-domain.com/Demo.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://your-domain.com/" />
+        <meta property="twitter:title" content="Tic Tac Toe - Play Classic XO Game Online" />
+        <meta property="twitter:description" content="Modern implementation of the classic Tic Tac Toe game with adjustable board sizes and custom rules." />
+        <meta property="twitter:image" content="https://your-domain.com/Demo.png" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
