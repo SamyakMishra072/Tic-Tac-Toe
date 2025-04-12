@@ -35,7 +35,12 @@ const Header = () => {
   }}
 >
   <Toolbar>
-    <img src="/logg.svg" alt="Logo" style={{ width: 200, marginRight: 12 }} />
+    <img 
+      src="/logg.svg" 
+      alt="Logo" 
+      className={theme.palette.mode === 'dark' ? 'invert' : ''} 
+      style={{ width: 200, marginRight: 12 }} 
+    />
 
     <Typography
       variant="h6"
