@@ -24,7 +24,7 @@ const Footer = () => {
         },
       }}
     >
-      <Typography variant="body1">
+      <Typography variant="body1" className='footerContent'>
         &copy; {currentYear} Made by Samyak Mishra with{' '}
         <FavoriteIcon
           sx={{

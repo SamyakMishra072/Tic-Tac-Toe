@@ -42,3 +42,9 @@
   .invert {
     filter: invert(1);
   }
+  
+  @media (max-width: 440px){
+    .footerContent{
+      font-size: 0.72em;
+    }
+  }

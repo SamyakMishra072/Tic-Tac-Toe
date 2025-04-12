@@ -258,6 +258,14 @@ const Home = () => {
           <DialogContent>
             <DialogContentText component="div">
               {/* Keep existing instructions content */}
+              <p>Goal: Get 3 of your marks (X or O) in a row — horizontally, vertically, or diagonally to Win else Game will be Draw.</p>
+              <p>👥 Player vs Player:</p>
+              <p>1. Two players take turns.</p>
+              <p>2. Player 1 is X, Player 2 is O.</p>
+              <p>3. Tap a cell to place your mark.</p>
+              <p>🤖 Player vs Computer:</p>
+              <p>1. You play against a smart computer.</p>
+              <p>2. Turns alternate — the computer moves automatically.</p>
             </DialogContentText>
           </DialogContent>
           <DialogActions>

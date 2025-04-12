@@ -5,7 +5,7 @@ import Square from './Square';
 
 const Board = ({ board, onMove, winningLine }) => {
   return (
-    <Paper elevation={3} sx={{ padding: 2, margin: 'auto', maxWidth: 320 }}>
+    <Paper elevation={3} sx={{ padding: 1, margin: 'auto', maxWidth: 320 }}>
       <Grid container spacing={1}>
         {board.map((value, index) => (
           <Grid item xs={4} key={index}>

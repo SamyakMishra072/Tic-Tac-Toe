@@ -30,8 +30,8 @@ const Square = ({ value, onClick, isWinning }) => {
     variant="outlined"
     onClick={handleClick}
     sx={{
-      width: '100px',
-      height: '100px',
+      width: '90px',
+      height: '90px',
       fontSize: '2rem',
       animation: isWinning ? `${pulse} 1s infinite` : 'none',
       backgroundColor: isWinning ? 'rgba(76, 175, 80, 0.2)' : bgColor,
