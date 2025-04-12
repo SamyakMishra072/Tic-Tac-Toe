@@ -55,6 +55,7 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>Tic Tac Toe - Play Classic XO Game Online</title>
         <meta name="title" content="Tic Tac Toe - Play Classic XO Game Online" />
+        <link rel="icon" href="/faav.png" />
         <meta name="description" content="Play the classic Tic Tac Toe game online with adjustable board sizes and custom rules. Challenge the computer or play with friends in this modern implementation of the timeless strategy game." />
         <meta name="keywords" content="tic tac toe, XO game, noughts and crosses, strategy game, online game, board game, puzzle game" />
         <meta name="author" content="Your Name" />
