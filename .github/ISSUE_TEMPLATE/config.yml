@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Game Documentation
+    url: https://github.com/SamyakMishra072/Tic-Tac-Toe#readme
+    about: Check out the game documentation before creating an issue
+  - name: Security Issue
+    url: https://github.com/SamyakMishra072/Tic-Tac-Toe/security/policy
+    about: Please report security vulnerabilities here
