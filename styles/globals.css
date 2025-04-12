@@ -40,3 +40,8 @@
     transition: background-image 0.09s ease-in-out;
   }
   
+  @media (max-width: 440px){
+    .footerContent{
+      font-size: 0.72em;
+    }
+  }
